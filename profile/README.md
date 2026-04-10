@@ -1,6 +1,6 @@
-# # Integrated Management Effectiveness Tool (IMET)
+# Integrated Management Effectiveness Tool (IMET)
 
-<p align="center"><img src="images/icon.png" width="200"></p>
+<p align="center"><img src="icon.png" width="200"></p>
 
 ## Overview
 
@@ -21,3 +21,73 @@ and in buffer areas of Protected Areas. The IMET conserved areas tool:
 - Allows understanding community awareness in the management and governance of the conserved area and promotes dialogue, governance and shared planning
 - Empowers local communities for effective conservation
 - Encourages participation from local communities, government agencies, and NGOs, fostering collaboration and shared responsibility
+
+## Repository Ecosystem
+
+The IMET platform is organized across multiple repositories. The **imet-core** library contains all assessment logic and is shared by host applications
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        imet-core                            │
+│              (Laravel Composer package)                     │
+└───────────────────────────┬─────────────────────────────────┘
+                            │  integrated via Composer
+                ┌───────────┴────────────┐
+                ▼                        ▼
+       ┌─────────────────┐     ┌──────────────────┐
+       │   imet-offline  │     │   imet-online    │
+       │   Desktop app   │     │  Web application │
+       │   (NativePHP)   │     │    (Laravel)     │
+       └─────────────────┘     └──────────────────┘
+```
+
+### [`imet-core`](https://github.com/imettool/imet-core) — Core Library
+
+The shared heart of the platform which provides all assessment functionality consumed by both host applications.
+
+> [!IMPORTANT]
+> **This is not a standalone application.** In order to execute the code this codebase, you need to integrate it into a hosting application such as `imet-offline` or `imet-online`.
+
+Provides:
+- **Assessment modules** — three complete assessment systems (see [Assessment Types](#assessment-types) below)
+- **Database migrations** — full schema for all assessment data
+- **Routes & API** — web routes and RESTful API endpoints
+- **Views & frontend assets** — Vue.js 3 components, maps, charts
+- **Localization** — English, French, Portuguese, Spanish
+- **Score calculation engine** — automated scoring of all assessment dimensions
+- **Report generation** — multiple report formats with export
+- **Data import/export** — CSV processing and Protected Planet integration
+
+---
+
+### [`imet-offline`](https://github.com/imettool/imet-offline) — Desktop Application
+
+A **cross-platform desktop application** built with [NativePHP](https://nativephp.com), enabling fully offline IMET assessments without any internet connection or server infrastructure.
+
+- Integrates `imet-core` as a Composer dependency
+- Runs entirely on the local machine (only Windows for now)
+- Uses **SQLite** as the local database
+- The most widely deployed implementation of IMET
+
+---
+
+### [`imet-online`](https://github.com/imettool/imet-online) — Web Application
+
+A **hosted web application** built on Laravel, enabling multi-user online access to IMET assessments.
+
+- Integrates `imet-core` as a Composer dependency
+- Standard server-based deployment
+- Uses **PostgreSQL** as the database
+- Designed for organizations managing assessments centrally or collaboratively
+
+---
+
+## Technology Stack
+
+| Layer           | Technologies                           |
+|-----------------|----------------------------------------|
+| Backend         | PHP 8.4+, Laravel                      |
+| Frontend        | Vue.js 3, Pinia, Tailwind CSS, Vite    |
+| Database        | SQLite (offline) · PostgreSQL (online) |
+| Desktop         | NativePHP                              |
+| Package manager | Composer (PHP) · npm (JS)              |
