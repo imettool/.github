@@ -49,7 +49,7 @@ The shared heart of the platform which provides all assessment functionality con
 > **This is not a standalone application.** In order to execute the code this codebase, you need to integrate it into a hosting application such as `imet-offline` or `imet-online`.
 
 Provides:
-- **Assessment modules** — three complete assessment systems (see [Assessment Types](#assessment-types) below)
+- **Assessment modules** — complete assessment systems
 - **Database migrations** — full schema for all assessment data
 - **Routes & API** — web routes and RESTful API endpoints
 - **Views & frontend assets** — Vue.js 3 components, maps, charts
