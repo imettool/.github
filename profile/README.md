@@ -79,3 +79,9 @@ A **hosted web application** built on Laravel, enabling multi-user online access
 | Database        | SQLite (offline) · PostgreSQL (online) |
 | Desktop         | NativePHP                              |
 | Package manager | Composer (PHP) · npm (JS)              |
+
+---
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
